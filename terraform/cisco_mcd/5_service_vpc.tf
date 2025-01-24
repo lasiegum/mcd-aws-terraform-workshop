@@ -81,9 +81,9 @@ resource "ciscomcd_gateway" "mcd_gateway" {
   min_instances          = 1
   mode                   = "HUB"
   # -- Step 7: Custom rule set - Disable the line below
-  policy_rule_set_id     = ciscomcd_policy_rule_set.mcd_egress_rule_set_allow_all.id
+  # policy_rule_set_id     = ciscomcd_policy_rule_set.mcd_egress_rule_set_allow_all.id
   # -- Step 7: Custom rule set - Enable the line below
-  # policy_rule_set_id     = ciscomcd_policy_rule_set.mcd_egress_rule_set_custom.id
+  policy_rule_set_id     = ciscomcd_policy_rule_set.mcd_egress_rule_set_custom.id
   region                 = data.aws_region.current.name
   security_type          = "EGRESS"
   ssh_key_pair           = data.aws_key_pair.aws_ssh_key_pair.key_name
