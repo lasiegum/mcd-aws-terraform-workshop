@@ -62,36 +62,36 @@ resource "aws_route_table" "sample_route_table2" {
 }
 
 # --- Step 6: Secure VPC --- Disable the following two routes (towards internet gateway)
+# resource "aws_route" "sample_internet_route1" {
+#  destination_cidr_block = "0.0.0.0/0"
+#  gateway_id             = aws_internet_gateway.sample_internet_gateway.id
+#  route_table_id         = aws_route_table.sample_route_table1.id
+#}
+
+#resource "aws_route" "sample_internet_route2" {
+#  destination_cidr_block = "0.0.0.0/0"
+#  gateway_id             = aws_internet_gateway.sample_internet_gateway.id
+#  route_table_id         = aws_route_table.sample_route_table2.id
+#}
+
+# --- Step 6: Secure VPC --- Enable the following two routes (towards MCD transit gateway)
 resource "aws_route" "sample_internet_route1" {
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.sample_internet_gateway.id
+  transit_gateway_id     = var.mcd_transit_gateway_id
   route_table_id         = aws_route_table.sample_route_table1.id
+  depends_on = [
+    ciscomcd_spoke_vpc.mcd_spoke
+   ]
 }
 
 resource "aws_route" "sample_internet_route2" {
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.sample_internet_gateway.id
+  transit_gateway_id     = var.mcd_transit_gateway_id
   route_table_id         = aws_route_table.sample_route_table2.id
+  depends_on = [
+    ciscomcd_spoke_vpc.mcd_spoke
+  ]
 }
-
-# --- Step 6: Secure VPC --- Enable the following two routes (towards MCD transit gateway)
-# resource "aws_route" "sample_internet_route1" {
-#   destination_cidr_block = "0.0.0.0/0"
-#   transit_gateway_id     = var.mcd_transit_gateway_id
-#   route_table_id         = aws_route_table.sample_route_table1.id
-#   depends_on = [
-#     ciscomcd_spoke_vpc.mcd_spoke
-#   ]
-# }
-
-# resource "aws_route" "sample_internet_route2" {
-#   destination_cidr_block = "0.0.0.0/0"
-#   transit_gateway_id     = var.mcd_transit_gateway_id
-#   route_table_id         = aws_route_table.sample_route_table2.id
-#   depends_on = [
-#     ciscomcd_spoke_vpc.mcd_spoke
-#   ]
-# }
 
 resource "aws_route_table_association" "sample_subnet_route_table_association1" {
   route_table_id = aws_route_table.sample_route_table1.id
