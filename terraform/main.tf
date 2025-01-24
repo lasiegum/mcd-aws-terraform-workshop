@@ -16,12 +16,12 @@ module "sample_vpc" {
 }
 
 # --- Step 2: Onboard with Cisco Multicloud Defense ---
-# module "cisco_mcd" {
-#   source                            = "./cisco_mcd"
-#   mcd_deployment_name               = var.mcd_deployment_name
-#   mcd_controller_aws_account_number = var.mcd_controller_aws_account_number
-#   mcd_cloud_account_name            = var.mcd_cloud_account_name
-#   aws_ssh_key_pair_name             = var.aws_ssh_key_pair_name
-#   aws_availability_zone1             = var.aws_availability_zone1
-#   aws_availability_zone2             = var.aws_availability_zone2
-# }
+module "cisco_mcd" {
+ source                            = "./cisco_mcd"
+ mcd_deployment_name               = var.mcd_deployment_name
+ mcd_controller_aws_account_number = var.mcd_controller_aws_account_number
+ mcd_cloud_account_name            = var.mcd_cloud_account_name
+ aws_ssh_key_pair_name             = var.aws_ssh_key_pair_name
+ aws_availability_zone1             = var.aws_availability_zone1
+ aws_availability_zone2             = var.aws_availability_zone2
+}
