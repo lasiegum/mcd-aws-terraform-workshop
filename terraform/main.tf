@@ -6,9 +6,9 @@ module "sample_vpc" {
   aws_availability_zone2 = var.aws_availability_zone2
 
   # ---  Step 4: Enable VPC Traffic Visibility  ---
-  # mcd_dns_query_log_config_id       = module.cisco_mcd.mcd_dns_query_log_config_id
-  # mcd_s3_bucket                     = module.cisco_mcd.mcd_s3_bucket
-  # mcd_controller_aws_account_number = var.mcd_controller_aws_account_number
+  mcd_dns_query_log_config_id       = module.cisco_mcd.mcd_dns_query_log_config_id
+  mcd_s3_bucket                     = module.cisco_mcd.mcd_s3_bucket
+  mcd_controller_aws_account_number = var.mcd_controller_aws_account_number
 
   # ---  Step 6: Secure Sample VPC  ---
   # mcd_service_vpc_id     = module.cisco_mcd.mcd_service_vpc_id
